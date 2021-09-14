@@ -7,30 +7,41 @@ const db = low(adapter)
 db.defaults({ books: [] }).write()
 
 function insertEntry(entry) {
-// store it locally
+// insert items and store it locally
     db.get('books').push(entry).write()
 }
 
 function getAllEntries() {
+    // gets all the entries in the database
+    data = db.get('books').value()
+    console.log(data[data.length - 1].id)
+
     return db.get('books').value()
 }
 
 function getEntryById(args){
-    var books = db.get('books').value()
-    field = books.find({"id": args}).value();
+    // gets all the entries in the database according to the id specified
+    var books = db.get('books')
+    field = books.find({"id": parseInt(args)}).value();
     return field
 }
 
-function updateEntry(items){
-    var books = db.get('books').value()
-//     postStore.find({ id: items.id })
-//    .assign({name: "new name"})
-//    .value();
+function updateEntry(bookId, items){
+    // Updates a selected entry in the database
+    var books = db.get('books')
+    books.find({id: parseInt(bookId)}).assign(items).write();
+}
+
+function deleteEntry(bookId){
+    // takes parameter as bookId and deletes the corresponding field with the matching bookId
+    var books = db.get('books')
+    books.remove({id: parseInt(bookId)}).write();
 }
 
 function getLastID(){
+    // gets the last record (used to generate a ID based on the Nth element)
     var data = db.get('books').value()
-    return data.length;
+    return data[data.length - 1].id;
 }
 
 module.exports = {
@@ -38,4 +49,6 @@ module.exports = {
     getAllEntries,
     getLastID,
     getEntryById,
+    updateEntry,
+    deleteEntry,
 }

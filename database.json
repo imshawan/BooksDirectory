@@ -29,6 +29,46 @@
       "language": "English",
       "year": 1813,
       "pages": 226
+    },
+    {
+      "id": 5,
+      "title": "Molloy, Malone Dies, The Unnamable, the trilogy",
+      "author": "Samuel Beckett",
+      "link": "https://en.wikipedia.org/wiki/Molloy_(novel)\n",
+      "origin": "Republic of Ireland",
+      "language": "French, English",
+      "year": 1952,
+      "pages": 256
+    },
+    {
+      "id": 6,
+      "title": "The Canterbury Tales",
+      "author": "Geoffrey Chaucer",
+      "link": "https://en.wikipedia.org/wiki/The_Canterbury_Tales\n",
+      "origin": "England",
+      "language": "English",
+      "year": 1450,
+      "pages": 544
+    },
+    {
+      "id": 7,
+      "title": "Stories",
+      "author": "Anton Chekhov",
+      "link": "https://en.wikipedia.org/wiki/List_of_short_stories_by_Anton_Chekhov\n",
+      "origin": "Russia",
+      "language": "Russian",
+      "year": 1886,
+      "pages": 194
+    },
+    {
+      "id": 8,
+      "title": "Nostromo",
+      "author": "Joseph Conrad",
+      "link": "https://en.wikipedia.org/wiki/Nostromo\n",
+      "origin": "United Kingdom",
+      "language": "English",
+      "year": 1904,
+      "pages": 320
     }
   ]
 }
