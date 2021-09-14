@@ -6,7 +6,6 @@ var credentials = require('../credentials');
 router.use(bodyparser.json());
 
 function authenticate (headers) {
-    console.log(headers.authorization);
     var authHeader = headers.authorization;
     if (!authHeader) {
         return false;
