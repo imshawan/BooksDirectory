@@ -29,10 +29,8 @@ function updateEntry(items){
 }
 
 function getLastID(){
-    var database = fs.readFileSync('database.json');
-    var data = JSON.parse(database);
-    data = Object.values(data.books).length;
-    return data;
+    var data = db.get('books').value()
+    return data.length;
 }
 
 module.exports = {
