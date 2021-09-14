@@ -13,9 +13,6 @@ function insertEntry(entry) {
 
 function getAllEntries() {
     // gets all the entries in the database
-    data = db.get('books').value()
-    console.log(data[data.length - 1].id)
-
     return db.get('books').value()
 }
 
