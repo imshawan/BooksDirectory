@@ -2,6 +2,7 @@ var express = require('express');
 const bodyparser = require('body-parser');
 var router = express.Router();
 var db = require('./entries');
+var credentials = require('../credentials');
 router.use(bodyparser.json());
 
 function authenticate (headers) {
@@ -14,9 +15,10 @@ function authenticate (headers) {
     var auth = new Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
     var user = auth[0];
     var pass = auth[1];
-    if (user == 'admin' && pass == 'password') {
+    if (user == credentials.username && pass == credentials.password) {
         return true // authorized
-    } else {
+    } 
+    else {
         return false
     }
   }
