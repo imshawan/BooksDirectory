@@ -25,7 +25,7 @@ npm install && npm start
 
 Using Curl:
 ```
-curl https://localhost:3000/books -H "Accept: application/json" 
+curl https://booksdirectory-49.herokuapp.com/books -H "Accept: application/json" 
 ```
 This returns all the books stored in the database.
 
@@ -33,7 +33,7 @@ This returns all the books stored in the database.
 
 Using Curl:
 ```
-curl http://localhost:3000/books/3 -H "Accept: application/json" 
+curl https://booksdirectory-49.herokuapp.com/books/3 -H "Accept: application/json" 
 ```
 This returns the information of a book with ID - 3 from the database.
 
@@ -53,7 +53,7 @@ curl -d '{
     "year": 1904,
     "pages": 320
 }' 
--H "Content-Type: application/json" --user username:password -X POST http://localhost:3000/books
+-H "Content-Type: application/json" --user username:password -X POST https://booksdirectory-49.herokuapp.com/books
 ```
 
 ### Modify books information from the database
@@ -70,7 +70,7 @@ curl -d '{
     "year": 1813,
     "pages": 226
 }' 
--H "Content-Type: application/json" --user username:password -X PUT http://localhost:3000/books/3
+-H "Content-Type: application/json" --user username:password -X PUT https://booksdirectory-49.herokuapp.com/books/3
 ```
 
 ### Delete books from the database
@@ -78,6 +78,6 @@ curl -d '{
 A book can be deleted only by an Admin. A delete request must be sent to the server along with the Auth credentials and the book ID which is to be deleted. An example is shown below.
 
 ```
-curl -H "Content-Type: application/json" --user username:password -X DELETE http://localhost:3000/books/4
+curl -H "Content-Type: application/json" --user username:password -X DELETE https://booksdirectory-49.herokuapp.com/books/4
 ```
 This will delete the book with ID - 4
