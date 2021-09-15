@@ -19,11 +19,13 @@ npm install && npm start
 
 ## Operations:
 
+### Endpoint URL: [https://booksdirectory-49.herokuapp.com/books/](https://booksdirectory-49.herokuapp.com/books/)
+
 ### Get all books:
 
 Using Curl:
 ```
-curl http://localhost:3000/books -H "Accept: application/json" 
+curl https://localhost:3000/books -H "Accept: application/json" 
 ```
 This returns all the books stored in the database.
 
