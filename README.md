@@ -1,6 +1,7 @@
 # Books Directory
 
 A basic Book Directory management system with 4 endpoints that supports GET, POST, PUT and DELETE operations. This project helps the user to store records of the book along with its related information to the database in an organised manner. A user can View datas according to their choice either all at a time or viewing them according to their respective IDs, but whereas the Add, Modify and Delete operations can be only performed by a admin. 
+
 The admin credentials are stored in *'credentials.js'* file that can be configured by the admin accordingly before deployment.
 Keeping the project simple but yet effective, this project uses the Basic Authentication technique inorder to verify the admin.
 
