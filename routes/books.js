@@ -4,6 +4,8 @@ var router = express.Router();
 var db = require('./entries');
 var credentials = require('../credentials');
 router.use(bodyparser.json());
+var validator = require('../validation/validator')
+const { validationResult} = require('express-validator');
 
 function authenticate (headers) {
     var authHeader = headers.authorization;
@@ -37,8 +39,14 @@ router.route('/(:bookId)?')
     }
 })
 
-.post(function(req, res, next){
-    if (!authenticate(req.headers)){
+.post(validator.validateData, function(req, res, next){
+    const errors = validationResult(req);
+    if (errors){
+        res.setHeader('Content-Type', 'application/json');
+        res.statusCode = 400;
+        res.json({error: errors.array()});
+    }
+    else if (!authenticate(req.headers)){
         res.setHeader('WWW-Authenticate', 'Basic');      
         res.statusCode = 401;
         res.json({status: "refused", message: "You are not authenticated! Only an Admin can Insert data."})
@@ -69,8 +77,14 @@ router.route('/(:bookId)?')
     }
 })
 
-.put(function(req, res, next) {
-    if (!authenticate(req.headers)){
+.put(validator.validateData, function(req, res, next) {
+    const errors = validationResult(req);
+    if (errors){
+        res.setHeader('Content-Type', 'application/json');
+        res.statusCode = 400;
+        res.json({error: errors.array()});
+    }
+    else if (!authenticate(req.headers)){
         res.setHeader('WWW-Authenticate', 'Basic');      
         res.statusCode = 401;
         res.json({status: "refused", message: "You are not authenticated! Only an Admin can Update data."})
