@@ -57,9 +57,10 @@ router.route('/(:bookId)?')
         "pages": req.body.pages
         }
         db.insertEntry(data)
-        res.setHeader('Content-Type', 'application/json');
+        resp = db.getEntryById(id)
         res.statusCode = 200;
-        res.json({status: "success", message: "Records entered successfully!"})
+        res.setHeader('Content-Type', 'application/json');
+        res.json({status: "success", message: "Records entered successfully!", entry: resp})
     }
     else {
         res.setHeader('Content-Type', 'application/json');
@@ -87,7 +88,8 @@ router.route('/(:bookId)?')
         }
         entries = db.updateEntry(req.params.bookId, data);
         res.statusCode = 200;
-        res.json({status: "success", message: "Record modified successfully!"});
+        updatedEntry = db.getEntryById(req.params.bookId);
+        res.json({status: "success", message: "Record modified successfully!", entry: updatedEntry});
     }
     else {
         res.statusCode = 400;

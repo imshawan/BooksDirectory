@@ -69,6 +69,16 @@
       "language": "English",
       "year": 1905,
       "pages": 320
+    },
+    {
+      "id": 9,
+      "title": "Madame Bovary",
+      "author": "Gustave Flaubert",
+      "link": "https://en.wikipedia.org/wiki/Madame_Bovary",
+      "origin": "France",
+      "language": "French",
+      "year": 1857,
+      "pages": 528
     }
   ]
 }

@@ -13,14 +13,25 @@ function insertEntry(entry) {
 
 function getAllEntries() {
     // gets all the entries in the database
-    return db.get('books').value()
+    entries = db.get('books').value()
+    if (entries){
+        return entries
+    }
+    else {
+        return null;
+    }
 }
 
 function getEntryById(args){
     // gets all the entries in the database according to the id specified
     var books = db.get('books')
     field = books.find({"id": parseInt(args)}).value();
-    return field
+    if (field){
+        return field
+    }
+    else {
+        return null;
+    }
 }
 
 function updateEntry(bookId, items){

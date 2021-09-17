@@ -2,6 +2,7 @@ const chai = require('chai');
 const server = require('../app');
 const chaiHttp = require('chai-http');
 const { expect } = require('chai');
+var Should = require('chai').should();
 const entries = require('../routes/entries')
 
 const userCredentials = {
@@ -13,7 +14,7 @@ const payloadForPOST = {
     "author": "Joseph Conrad",
     "origin": "United Kingdom",
     "language": "English",
-    "link": "https://en.wikipedia.org/wiki/Nostromo\n",
+    "link": "https://en.wikipedia.org/wiki/Nostromo",
     "pages": 320,
     "title": "Nostromo",
     "year": 1905
@@ -33,8 +34,7 @@ describe('API Tasks', () => {
             .get('/books')
             .end((err, response) => {
                 response.should.have.status(200);
-                response.body.should.be.a('array');
-            //done();
+                Should.exist(response.body)
             })
         })
     })
@@ -45,10 +45,10 @@ describe('API Tasks', () => {
             chai.request(server)
             .get('/books/1')
             .end((err, response) => {
-                // Storing a copy of Book with Id - 1 for PUT operation
+                // Storing a copy of Book with Id - 1 that will be modified and used for PUT operation
                 payloadForPUT = response.body;
                 response.should.have.status(200);
-                response.body.should.be.a('object');
+                expect(response.body.author).to.equal('Chinua Achebe');
             })
         })
     })
@@ -58,11 +58,11 @@ describe('API Tasks', () => {
         it('It should return a success message if data gets stored in the database', () => {
             chai.request(server)
             .post('/books')
-            .auth(userCredentials.username, userCredentials.password)
+            .auth(userCredentials.username, userCredentials.password) // Authentication for POST
             .send(payloadForPOST)
             .end((err, response) => {
                 response.should.have.status(200);
-                expect(response.body.status).to.equal('success');
+                expect(response.body.entry.title).to.equal(payloadForPOST.title);
             })
         })
     })
@@ -76,11 +76,11 @@ describe('API Tasks', () => {
             payloadForPUT.year = 1958;
             chai.request(server)
             .put('/books/1')
-            .auth(userCredentials.username, userCredentials.password)
+            .auth(userCredentials.username, userCredentials.password) // Authentication for PUT
             .send(payloadForPUT)
             .end((err, response) => {
                 response.should.have.status(200);
-                expect(response.body.status).to.equal('success');
+                expect(response.body.entry.year).to.equal(1958);
             })
         })
     })
@@ -94,14 +94,11 @@ describe('API Tasks', () => {
             chai.request(server)
             // deleting the last record
             .delete('/books/' + lastRecordId)
-            .auth(userCredentials.username, userCredentials.password)
+            .auth(userCredentials.username, userCredentials.password) // Authentication for DELETE
             .end((err, response) => {
                 response.should.have.status(200);
-                expect(response.body.status).to.equal('success');
-                currentlastID = entries.getLastID();
-                expect(lastRecordId).not.equal(currentlastID);
-                console.log("Total records Before deleting: " + lastRecordId);
-                console.log("Total records after deleting: " + currentlastID);
+                getDeletedPost = entries.getEntryById(lastRecordId);
+                Should.not.exist(getDeletedPost);
             })
         })
     })
